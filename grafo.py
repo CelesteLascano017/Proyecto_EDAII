@@ -79,3 +79,52 @@ class Grafo:
                     arbol[vecino] = []
 
         return arbol
+
+    # DFS para encontrar camino de un nodo inicio a un nodo destino
+    def dfs_camino(self, inicio, destino):
+        if inicio not in self.nodos or destino not in self.nodos:
+            return None
+
+        if inicio == destino:
+            return [inicio]
+
+        visitados = set()
+
+        def dfs_recursivo(nodo_actual, camino):
+            if nodo_actual == destino:
+                return camino
+
+            visitados.add(nodo_actual)
+
+            for vecino in self.nodos[nodo_actual].vecinos:
+                if vecino not in visitados:
+                    resultado = dfs_recursivo(vecino, camino + [vecino])
+                    if resultado is not None:
+                        return resultado
+
+            return None
+
+        return dfs_recursivo(inicio, [inicio])
+
+    # DFS para obtener el árbol DFS desde un nodo inicio
+    def dfs_arbol(self, inicio):
+        if inicio not in self.nodos:
+            return {}
+
+        arbol = {inicio: []}
+        visitados = set()
+
+        def dfs_recursivo(nodo_actual):
+            visitados.add(nodo_actual)
+
+            if nodo_actual not in arbol:
+                arbol[nodo_actual] = []
+
+            for vecino in self.nodos[nodo_actual].vecinos:
+                if vecino not in visitados:
+                    arbol[nodo_actual].append(vecino)
+                    arbol[vecino] = []
+                    dfs_recursivo(vecino)
+
+        dfs_recursivo(inicio)
+        return arbol
