@@ -127,11 +127,3 @@ class TestComparacionBfsDfs:
         assert camino_dfs is not None
         assert camino_bfs[0] == camino_dfs[0] == 'A'
         assert camino_bfs[-1] == camino_dfs[-1] == 'G'
-
-    # TODO: Analize Big O complexity for BFS and DFS
-    # def test_bfs_encuentra_camino_mas_corto(self, grafo_ejemplo):
-    #     # BFS siempre encuentra el camino más corto
-    #     camino_bfs = grafo_ejemplo.bfs_camino('A', 'G')
-    #     camino_dfs = grafo_ejemplo.dfs_camino('A', 'G')
-
-    #     assert len(camino_bfs) <= len(camino_dfs)
